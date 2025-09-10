@@ -1,0 +1,263 @@
+/* General Layout */
+.home-container {
+  min-height: 100vh; /* Use 100vh for full viewport height */
+  background-color: #f0fdf4; /* Light green background */
+  display: flex;
+  flex-direction: column;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Navigation Bar */
+.home-nav {
+  background-color: #388e3c; /* Dark green */
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-nav-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.home-nav-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.home-nav-login-button {
+  background-color: #4caf50; /* Green */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.home-nav-login-button:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+/* Main Content Area */
+.home-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the start (top) */
+  padding: 1rem;
+  text-align: center;
+}
+
+.home-welcome-title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #15803d; /* Darkest green */
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.home-welcome-subtitle {
+  font-size: 1.1rem;
+  color: #4caf50; /* Green */
+  margin-bottom: 2rem; /* Space before the slideshow */
+  max-width: 60%;
+  line-height: 1.5;
+}
+
+/* --- Image Slideshow Styles --- */
+.home-slideshow-container {
+  position: relative; /* Essential for positioning child images */
+  width: 80%; /* Adjust as needed */
+  max-width: 800px; /* Max width for larger screens */
+  height: 400px; /* Fixed height for the slideshow container */
+  margin: 2rem auto; /* Center it with space above and below */
+  overflow: hidden; /* Hides parts of images that are not within the container */
+  border-radius: 0.75rem; /* Rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  background-color: #e0e0e0; /* Placeholder background */
+}
+
+.slideshow-image {
+  position: absolute; /* Allows images to stack on top of each other */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures images cover the area without distortion */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.8s ease-in-out; /* Smooth fade effect */
+  pointer-events: none; /* Prevents interaction with hidden images */
+}
+
+.slideshow-image.current {
+  opacity: 1; /* The current image is visible */
+}
+
+/* These classes are for more complex sliding animations.
+   For a simple fade, they aren't strictly necessary but are included
+   if you decide to implement sliding instead of fading. */
+.slideshow-image.previous {
+  left: -100%;
+  opacity: 0;
+}
+
+.slideshow-image.next {
+  left: 100%;
+  opacity: 0;
+}
+
+
+
+.home-features {
+  display: flex;          /* Makes the container a flex container */
+  flex-wrap: wrap;        /* Allows items to wrap to the next line on smaller screens */
+  justify-content: center;/* Centers the cards horizontally within the available space */
+  gap: 2rem;              /* Creates space between the cards */
+  margin-top: 2rem;       /* Space between slideshow and features */
+  width: 100%;
+  max-width: 1000px;      /* Limits the overall width of the feature section */
+}
+
+.home-feature-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 300px;       /* Sets a maximum width for each card */
+  flex: 1;                /* Allows cards to grow and shrink to fill available space */
+  display: flex;          /* Makes the card content itself a flex container */
+  flex-direction: column; /* Stacks content inside the card vertically */
+  align-items: center;    /* Centers content inside the card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover effect */
+}
+
+.home-feature-card:hover {
+  transform: translateY(-5px); /* Lift card slightly on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+}
+
+
+.home-feature-icon {
+  color: #4caf50; /* Green */
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.home-feature-truck-icon {
+  width: 64px;
+  height: 64px;
+}
+
+.home-feature-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #15803d; /* Darkest green */
+  margin-bottom: 0.5rem;
+}
+
+.home-feature-description {
+  color: #4caf50; /* Green */
+  line-height: 1.5;
+}
+
+.home-footer {
+  background-color: #15803d;; /* Very dark green */
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+
+@media (max-width: 768px) {
+  .home-nav-title {
+    font-size: 1.25rem;
+  }
+
+  .home-welcome-title {
+    font-size: 2rem;
+  }
+
+  .home-welcome-subtitle {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+
+  .home-slideshow-container {
+    width: 90%;
+    height: 300px; /* Adjust height for medium screens */
+  }
+
+  .home-features {
+    gap: 1.5rem;
+    /* When flex-wrap: wrap is active, and there's not enough space,
+       items will naturally go to the next line. No need for flex-direction: column here. */
+  }
+
+  .home-feature-card {
+    padding: 1rem;
+    max-width: 350px; /* Give them a bit more room */
+  }
+}
+
+@media (max-width: 640px) {
+  .home-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .home-features {
+    /* At this breakpoint, it's typical for items to stack vertically */
+    flex-direction: column;
+    align-items: center; /* Center them when stacked */
+  }
+
+  .home-feature-card {
+    width: 90%; /* Take up more width when stacked */
+  }
+
+  .home-welcome-subtitle {
+    max-width: 95%;
+  }
+
+  .home-slideshow-container {
+    height: 250px; /* Adjust height for smaller mobile screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .home-nav-title {
+    font-size: 1.1rem;
+  }
+
+  .home-welcome-title {
+    font-size: 1.7rem;
+  }
+
+  .home-welcome-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .home-slideshow-container {
+    height: 180px; /* Even smaller height for very small mobile screens */
+  }
+
+  .home-feature-title {
+    font-size: 1.1rem;
+  }
+
+  .home-feature-description {
+    font-size: 0.85rem;
+  }
+}

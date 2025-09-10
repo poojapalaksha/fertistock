@@ -1,0 +1,993 @@
+/* src/components/DashboardPage.css */
+
+/* CSS Variables for easier width management */
+:root {
+    --sidebar-width: 180px; /* Reduced from 200px to 180px */
+    --sidebar-width-md: 160px; /* Reduced from 180px to 160px */
+    --sidebar-margin-left-sm: 0px; /* Margin for small screens (sidebar is at bottom) */
+    --main-content-padding: 30px;
+    --main-content-left-spacing: 50px;
+    /* Color Palette (optional, but good practice) */
+    --primary-color: #34c38f; /* Accent green for line and area */
+    --primary-color-dark: #2a9d77; /* A darker shade for dot hover */
+    --secondary-color: #2d3748; /* Dark charcoal for sidebar */
+    --dot-color: #2d3748; /* Darker color for sales chart dots */
+    --text-dark: #1a202c;
+    --text-medium: #4a5568;
+    --text-light: #718096;
+    --bg-light: #f0f4f8; /* Overall background */
+    --card-bg: white;
+    --border-color: #e2e8f0;
+
+    /* UPDATED: Even Lighter, cooler colors for bars (matching JS array) */
+    --bar-color-1: #d0eaff; /* Very Light Blue */
+    --bar-color-2: #e0f2ff; /* Lighter Blue */
+    --bar-color-3: #f0f8ff; /* Alice Blue (very light) */
+    --bar-color-4: #c9e7f8; /* Light Sky Blue */
+    --bar-color-5: #a7d9f2; /* Pale Blue */
+    --bar-color-6: #85c7e0; /* Light Cyan */
+    --bar-color-7: #63b5ce; /* Medium Light Blue */
+    --bar-color-8: #41a3bc; /* Light Teal Blue */
+    --bar-color-9: #1f91aa; /* Stronger Teal Blue */
+    --bar-color-10: #007f98; /* Dark Teal */
+
+    /* New green color for report buttons */
+    --report-button-green: #28a745;
+    --report-button-green-hover: #218838;
+}
+
+/* ========================================================================================
+    REPORT PAGE STYLES (for src/Report.js)
+    It's often a good practice to keep styles for different components in separate files.
+    For example, you could move these into a new file: `src/Report.css`
+    And then import them only in `Report.js`: `import './Report.css';`
+========================================================================================
+*/
+
+.report-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    background-color: var(--bg-light);
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.report-container {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 900px; /* Max width for readability */
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.report-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.report-header h2 {
+    color: var(--primary-color);
+    font-size: 36px;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.report-header h3 {
+    color: var(--text-dark);
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.report-header .company-info,
+.report-header .company-address,
+.report-header .company-contact {
+    font-size: 14px;
+    color: var(--text-medium);
+    margin: 3px 0;
+}
+
+.report-summary {
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-color);
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.report-summary p strong {
+    color: var(--primary-color);
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+.report-table th,
+.report-table td {
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.report-table th {
+    background-color: var(--secondary-color);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.report-table td {
+    background-color: var(--card-bg);
+    color: var(--text-dark);
+}
+
+.report-table tbody tr:nth-child(even) td {
+    background-color: #f8fbfd; /* Slightly different background for even rows */
+}
+
+.report-table .text-right {
+    text-align: right;
+    font-weight: 600;
+    color: var(--primary-color-dark);
+}
+
+.report-table .item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.report-table .item-list li {
+    margin-bottom: 5px;
+    color: var(--text-medium);
+}
+
+.report-table .item-list li:last-child {
+    margin-bottom: 0;
+}
+
+.no-report-data {
+    text-align: center;
+    padding: 50px;
+    font-size: 20px;
+    color: var(--text-light);
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.report-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+}
+
+.report-actions button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.report-actions .back-button {
+    background-color: var(--text-light);
+    color: white;
+}
+
+.report-actions .back-button:hover {
+    background-color: #617088;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.report-actions .download-button {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.report-actions .download-button:hover {
+    background-color: var(--primary-color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.report-actions .print-button {
+    background-color: #007bff; /* A nice blue for print */
+    color: white;
+}
+
+.report-actions .print-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Responsive styles for Report Page */
+@media (max-width: 768px) {
+    .report-page-wrapper {
+        padding: 20px 10px;
+    }
+    .report-container {
+        padding: 25px;
+        border-radius: 10px;
+    }
+    .report-header h2 {
+        font-size: 28px;
+    }
+    .report-header h3 {
+        font-size: 20px;
+    }
+    .report-summary {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .report-table th,
+    .report-table td {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    .report-table .item-list li {
+        font-size: 12px;
+    }
+    .report-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .report-actions button {
+        width: 100%;
+        max-width: 300px;
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .report-container {
+        padding: 15px;
+    }
+    .report-header h2 {
+        font-size: 24px;
+    }
+    .report-header h3 {
+        font-size: 18px;
+    }
+    .report-header .company-info,
+    .report-header .company-address,
+    .report-header .company-contact {
+        font-size: 12px;
+    }
+    .report-table th,
+    .report-table td {
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+    .report-table .item-list li {
+        font-size: 10px;
+    }
+}
+
+
+/* ========================================================================================
+    END OF REPORT PAGE STYLES.
+    The rest of the CSS below is for the DashboardPage (main dashboard layout and charts).
+========================================================================================
+*/
+
+/* Base Styles & General Layout */
+body {
+    margin: 0; /* Remove default body margin */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-light); /* Light background for the whole app */
+    color: var(--text-medium); /* Default text color */
+}
+
+.dashboard-container {
+    display: flex; /* Establishes a flex container for sidebar and main content */
+    min-height: 100vh; /* Ensures the container is at least the viewport height, allows it to grow if content is longer */
+}
+
+/* Sidebar / Navigation Styling */
+.sidebar {
+    width: var(--sidebar-width); /* Use CSS variable for width */
+    background-color: var(--secondary-color); /* Darker charcoal background */
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Stack logo and nav links vertically */
+    box-shadow: 2px 0 8px rgba(0,0,0,0.2); /* Enhanced shadow */
+    box-sizing: border-box; /* Crucial: padding and border are included in the width */
+
+    /* --- Key Properties for Fixed Sidebar --- */
+    position: fixed; /* Makes the sidebar fixed relative to the viewport */
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.sidebar .logo {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: var(--primary-color); /* Accent green color for the logo */
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Stronger text shadow */
+}
+
+.sidebar .nav-links {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar .nav-links li {
+    margin-bottom: 12px; /* Space between navigation items */
+}
+
+.sidebar .nav-links li a {
+    display: flex;
+    align-items: center; /* Vertically align icon and text */
+    padding: 12px 15px;
+    color: #a0aec0; /* Lighter gray for inactive links */
+    text-decoration: none; /* Remove underline */
+    border-radius: 8px; /* Rounded corners for links */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.sidebar .nav-links li a:hover {
+    background-color: #4a5568; /* Slightly lighter charcoal on hover */
+    color: white;
+    transform: translateX(5px); /* Slight slide on hover */
+}
+
+.sidebar .nav-links li.active a {
+    background-color: var(--primary-color); /* Accent green for active link */
+    color: white;
+    font-weight: 600;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.3); /* Enhanced inner shadow for active state */
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1; /* Allows the main content to grow and take the remaining horizontal space */
+    padding: var(--main-content-padding); /* Consistent default padding for main content */
+    overflow-y: auto; /* Enables scrolling for the main content area if its content overflows */
+    box-sizing: border-box; /* Crucial: padding is included in the width */
+
+    /* --- Key Properties for Fixed Sidebar --- */
+    /* Position the main content exactly after the sidebar's total width */
+    margin-left: calc(var(--sidebar-width) + (2 * 20px)); /* sidebar-width + sidebar-left-padding + sidebar-right-padding */
+    /* Add additional left padding for visual separation from the sidebar */
+    padding-left: calc(var(--main-content-padding) + var(--main-content-left-spacing));
+}
+
+
+.main-content header {
+    display: flex;
+    justify-content: space-between; /* Pushes title to left, user info to right */
+    align-items: center; /* Vertically align items */
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color); /* Subtle separator below header */
+}
+
+.main-content header h2 {
+    margin: 0;
+    color: var(--text-dark); /* Dark text for heading */
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.main-content header .user-info {
+    color: var(--text-light); /* Muted gray text for user info */
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Overview Cards Section */
+.overview-cards {
+    display: grid;
+    /* Responsive grid: auto-fit creates columns, minmax sets min/max width */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px; /* Gap between cards */
+    margin-bottom: 40px; /* Space below the cards */
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Enhanced soft shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth hover effects */
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02); /* Lift and slight scale effect on hover */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); /* Stronger shadow on hover */
+}
+
+.card-header {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.card-body {
+    font-size: 32px; /* Larger value font size */
+    font-weight: 700;
+    color: var(--primary-color); /* Accent green for values */
+    display: flex;
+    align-items: baseline; /* Aligns value and unit nicely */
+}
+
+.card-body .value {
+    margin-right: 8px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Slightly stronger text shadow */
+}
+
+.card-footer {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color); /* Dashed separator */
+}
+
+.card-footer small {
+    font-size: 14px;
+    color: var(--text-light); /* Muted gray for footer text */
+}
+
+/* Reusable Chart Card Styling */
+.chart-card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Enhanced soft shadow */
+    margin-bottom: 40px;
+}
+
+.chart-card h3 {
+    margin: 0 0 25px; /* More space below heading */
+    color: var(--text-dark);
+    font-size: 22px;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* --- Y-Axis Styles (shared by both charts) --- */
+.y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute labels vertically */
+    align-items: flex-end; /* Align labels to the right */
+    padding-right: 15px; /* Spacing between labels and chart area */
+    font-size: 13px;
+    color: var(--text-light);
+    width: 70px; /* Width for Y-axis labels */
+    padding-bottom: 30px; /* Space for X-axis label alignment */
+    padding-top: 10px;
+    box-sizing: border-box;
+    border-right: 1px dashed var(--border-color); /* Y-axis line */
+    flex-shrink: 0; /* Prevent Y-axis from shrinking */
+}
+
+.y-axis .y-label {
+    text-align: right;
+    width: 100%;
+    white-space: nowrap; /* Prevent labels from wrapping */
+}
+
+.y-axis .y-label.bottom {
+    position: relative;
+    transform: translateY(15px); /* Adjust to align with the base of bars/chart */
+}
+.y-axis .y-label.middle {
+    position: relative;
+    transform: translateY(5px);
+}
+
+/* --- Bar Chart Container (for Inventory and Sales) --- */
+.bar-chart-container {
+    display: flex; /* For arranging Y-axis and bars */
+    height: 280px; /* Fixed height for the chart area */
+    padding: 0 15px;
+    box-sizing: border-box; /* Include padding in element's total width/height */
+}
+
+.bars-and-x-axis {
+    flex-grow: 1; /* Allows the chart area to take remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Pushes bars/chart to the bottom */
+    box-sizing: border-box;
+}
+
+.bars {
+    display: flex;
+    justify-content: space-around; /* Distribute bars evenly */
+    align-items: flex-end; /* Align bars to the bottom */
+    height: 100%;
+    border-bottom: 1px solid var(--border-color); /* X-axis line */
+    padding-bottom: 0;
+    box-sizing: border-box;
+}
+
+.bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    flex-basis: 0;
+    flex-grow: 1; /* Allow bars to grow to fill space */
+    max-width: 150px; /* Max width for individual bars */
+    margin: 0 8px; /* Margin between bars */
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+    overflow: visible; /* Allows value to pop out above the bar */
+}
+
+/* Assign specific colors to bars using nth-child based on new lighter palette */
+/* Note: These apply to ALL .bar elements unless overridden by a more specific selector */
+.bar-wrapper:nth-child(1) .bar { background-color: var(--bar-color-1); }
+.bar-wrapper:nth-child(2) .bar { background-color: var(--bar-color-2); }
+.bar-wrapper:nth-child(3) .bar { background-color: var(--bar-color-3); }
+.bar-wrapper:nth-child(4) .bar { background-color: var(--bar-color-4); }
+.bar-wrapper:nth-child(5) .bar { background-color: var(--bar-color-5); }
+.bar-wrapper:nth-child(6) .bar { background-color: var(--bar-color-6); }
+.bar-wrapper:nth-child(7) .bar { background-color: var(--bar-color-7); }
+.bar-wrapper:nth-child(8) .bar { background-color: var(--bar-color-8); }
+.bar-wrapper:nth-child(9) .bar { background-color: var(--bar-color-9); }
+.bar-wrapper:nth-child(10) .bar { background-color: var(--bar-color-10); }
+
+
+.bar {
+    width: 70%; /* Bar actual width relative to its wrapper */
+    border-radius: 8px 8px 0 0; /* Rounded top corners */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger initial bar shadow */
+    transition: height 0.5s ease-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.4); /* Subtle white border for depth */
+}
+
+.bar-wrapper:hover .bar {
+    transform: translateY(-10px) scale(1.05); /* Lift effect with slight scale on hover */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Much stronger shadow on hover for visual pop */
+}
+
+/* Default state for bar-value (hidden) */
+.bar-value {
+    position: absolute;
+    top: -25px; /* Position above the bar */
+    color: var(--text-dark); /* Darker text for readability */
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0; /* Hidden by default */
+    transform: translateY(15px); /* Start lower for slide-up effect */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
+    pointer-events: none; /* Allows clicks to pass through to the bar */
+    text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.9); /* Stronger text shadow for readability */
+    z-index: 2;
+}
+
+/* REMOVED: The specific rule that hid bar-value for .sales-chart on hover.
+   Now, the generic .bar-wrapper:hover .bar-value rule will apply, making it visible. */
+
+/* This rule will now apply to both sales and inventory charts */
+.bar-wrapper:hover .bar-value {
+    opacity: 1; /* Make visible on hover */
+    transform: translateY(0); /* Slide up to visible position */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Enable transition */
+}
+
+
+/* Hide bar-secondary-value for all charts if it exists */
+/* Although it's removed from inventory chart JSX, this ensures it's hidden for sales chart on hover */
+.bar-secondary-value {
+    display: none; /* Hide the secondary value (fertilizer name or day name) */
+}
+
+
+.bar-label {
+    position: absolute;
+    bottom: -30px; /* Below the x-axis line */
+    font-size: 13px;
+    color: var(--text-medium);
+    text-align: center;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncate long labels */
+    padding-top: 5px; /* Space between bar and label */
+    text-transform: capitalize; /* NEW: Capitalize the first letter of each word in the label */
+}
+
+/* --- Line Chart Container (for Sales) --- */
+/* Note: The line chart doesn't use .bar-value, so its styles are simpler */
+.line-chart-container {
+    display: flex;
+    height: 280px; /* Match height of bar chart */
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.lines-and-x-axis {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    position: relative; /* Needed for absolute positioning of SVG */
+}
+
+.chart-line-area-wrapper {
+    position: relative;
+    height: 100%;
+    border-bottom: 1px solid var(--border-color); /* X-axis line */
+}
+
+/* SVG specific styles for the line chart */
+.sales-line-chart-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible; /* Allow points to extend beyond SVG bounds for labels */
+}
+
+.sales-line-path {
+    stroke: var(--primary-color); /* Accent color for the line */
+    stroke-width: 3;
+    fill: none; /* No fill for the line itself */
+    transition: stroke-dasharray 0.5s ease-out; /* For potential animation */
+}
+
+.sales-area-path {
+    /* Fill color defined via linear gradient in SVG defs */
+    transition: all 0.5s ease-out; /* Smooth transition for area changes */
+}
+
+/* Existing point and label styles (will overlay the SVG) */
+.line-point-wrapper {
+    position: absolute; /* Allows precise horizontal positioning */
+    height: 100%; /* For relative positioning of point and label inside */
+    top: 0;
+    width: 0; /* This wrapper itself has no width, just serves as a horizontal anchor */
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; /* Keeps labels at the bottom */
+    box-sizing: border-box;
+    z-index: 10; /* Ensures points and labels are above the SVG */
+    transform: translateX(-50%); /* Centers the wrapper on its 'left' coordinate */
+}
+
+.line-chart-point {
+    width: 12px; /* Size of the data point dot */
+    height: 12px;
+    background-color: var(--dot-color); /* Different color for points */
+    border: 3px solid #fff; /* Thicker white border around the dot */
+    border-radius: 50%; /* Makes it a circle */
+    position: absolute;
+    left: 50%; /* Centers the point within its wrapper */
+    transform: translate(-50%, 50%); /* Fine-tunes positioning to be centered on the bottom edge */
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    z-index: 20; /* Ensures the point is on top of the area fill */
+}
+
+.line-point-wrapper:hover .line-chart-point {
+    transform: translate(-50%, 50%) scale(1.5); /* Scale up more on hover */
+    background-color: var(--primary-color); /* Dot color becomes primary color on hover */
+    box-shadow: 0 0 15px 5px rgba(52, 195, 143, 0.7); /* Stronger glow effect on hover */
+    border-color: var(--card-bg); /* Ensure border is visible against glow */
+}
+
+.line-value {
+    position: absolute;
+    top: -35px; /* Position above the point */
+    left: 50%;
+    transform: translateX(-50%) translateY(15px); /* Start lower for slide-up effect */
+    color: var(--text-dark); /* Darker text for readability */
+    background-color: rgba(255, 255, 255, 0.98); /* Near-opaque light background for tooltip */
+    padding: 8px 12px; /* Slightly larger padding for tooltip */
+    border-radius: 6px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); /* Stronger soft shadow for tooltip */
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    pointer-events: none; /* Allows clicks to pass through to the point */
+    z-index: 2; /* Ensure it's above other elements */
+}
+
+.line-point-wrapper:hover .line-value {
+    opacity: 1; /* Visible on hover */
+    transform: translateX(-50%) translateY(0); /* Slide up to visible position */
+}
+
+.line-label {
+    position: absolute;
+    bottom: -30px; /* Below the x-axis line */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    color: var(--text-medium);
+    text-align: center;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncate long labels */
+    padding-top: 5px;
+}
+
+/* Error Message Styling */
+.error-message {
+    color: #e53e3e; /* Red color for error */
+    background-color: #fed7d7; /* Light red background */
+    border: 1px solid #fc8181; /* Red border */
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+
+/* Responsive Design */
+/* For screens up to 992px (e.g., larger tablets, small laptops) */
+@media (max-width: 992px) {
+    .sidebar {
+        width: var(--sidebar-width-md); /* Use medium width variable */
+        padding: 15px; /* Adjust padding for medium screens */
+    }
+    .sidebar .logo {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+    .sidebar .nav-links li a {
+        padding: 10px 12px;
+        font-size: 15px;
+    }
+    .main-content {
+        padding: calc(var(--main-content-padding) - 5px); /* Slightly reduced padding */
+        /* Adjusted margin-left for medium screens */
+        /* sidebar has 15px left and 15px right padding, so 30px total horizontal padding */
+        margin-left: calc(var(--sidebar-width-md) + 15px + 15px);
+        padding-left: calc(var(--main-content-padding) + var(--main-content-left-spacing) - 5px); /* Adjusted padding-left for medium screens */
+    }
+    .main-content header h2 {
+        font-size: 24px;
+    }
+    .main-content header .user-info {
+        font-size: 16px;
+    }
+    .overview-cards {
+        gap: 20px;
+    }
+    .card {
+        padding: 20px;
+    }
+    .card-header {
+        font-size: 18px;
+    }
+    .card-body {
+        font-size: 28px;
+    }
+    .chart-card {
+        padding: 20px;
+    }
+    .chart-card h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    .bar-chart-container, .line-chart-container {
+        height: 250px;
+        padding: 0 10px;
+    }
+    .y-axis {
+        width: 60px;
+        padding-right: 10px;
+        font-size: 12px;
+    }
+    .bar-wrapper {
+        margin: 0 5px;
+        max-width: 120px;
+    }
+    .bar {
+        width: 75%;
+    }
+    .bar-value, .line-value {
+        font-size: 12px;
+        top: -20px;
+    }
+    .bar-label, .line-label {
+        font-size: 12px;
+        bottom: -25px;
+    }
+    .line-chart-point {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* For screens up to 768px (e.g., most tablets in portrait, large phones in landscape) */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column; /* Stack content vertically on small screens */
+    }
+
+    .sidebar {
+        width: 100%; /* Full width for mobile bottom bar */
+        position: fixed; /* Fixed to the viewport for mobile */
+        bottom: 0;
+        left: 0;
+        top: auto; /* Overrides 'top: 0' from desktop styles */
+        height: auto; /* Auto height for the mobile bottom bar based on content */
+        flex-direction: row; /* Arranges navigation items horizontally */
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 0; /* Adjust padding for mobile bar */
+        z-index: 1000; /* High z-index to ensure it's always visible */
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15); /* Shadow above the bar */
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+    .sidebar .logo {
+        display: none; /* Hide logo on small screens for compact bar */
+    }
+
+    .sidebar .nav-links {
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-around;
+        width: 100%; /* Ensure nav links take full width of sidebar */
+    }
+
+    .sidebar .nav-links li {
+        margin-bottom: 0;
+        margin-right: 0;
+        flex: 1; /* Distribute links evenly across the width */
+        text-align: center;
+    }
+    .sidebar .nav-links li a {
+        padding: 8px 5px;
+        text-align: center;
+        flex-direction: column; /* Stack icon/text vertically within each nav item */
+        font-size: 11px; /* Smaller font for mobile tabs */
+    }
+    /* If you add SVG icons, you might need: */
+    /* .sidebar .nav-links li a svg {
+        font-size: 18px;
+        margin-bottom: 4px;
+    } */
+
+    .sidebar .nav-links li.active a {
+        border-radius: 8px;
+    }
+
+    .main-content {
+        padding: 20px; /* Reduced padding for smaller screens */
+        margin-left: var(--sidebar-margin-left-sm); /* Use 0px for small screens */
+        padding-left: var(--main-content-padding); /* Ensure default padding-left */
+        padding-bottom: 70px; /* Add padding to prevent content from hiding behind the fixed bottom bar */
+    }
+
+    .overview-cards {
+        grid-template-columns: 1fr; /* Stack cards vertically on small screens */
+    }
+
+    /* Responsive adjustments for charts on small screens */
+    .bar-chart-container, .line-chart-container {
+        height: 200px; /* Shorter charts */
+        padding: 0 5px;
+    }
+    .y-axis {
+        width: 40px;
+        padding-right: 5px;
+        padding-bottom: 20px;
+        padding-top: 5px;
+        font-size: 10px;
+    }
+    .bar-wrapper {
+        margin: 0 2px;
+        max-width: 60px; /* Even narrower bars */
+    }
+    .bar {
+        width: 80%;
+    }
+    .bar-value, .line-value {
+        font-size: 10px;
+        top: -18px;
+    }
+    .bar-label, .line-label {
+        font-size: 10px;
+        bottom: -20px;
+    }
+    .line-chart-point {
+        width: 8px;
+        height: 8px;
+        border-width: 2px;
+    }
+}
+
+/* For screens up to 480px (e.g., most mobile phones in portrait) */
+@media (max-width: 480px) {
+    .main-content header {
+        flex-direction: column; /* Stack header elements vertically */
+        align-items: flex-start;
+        gap: 10px; /* Space between title and user info */
+    }
+    .main-content header h2 {
+        font-size: 20px;
+    }
+    .main-content header .user-info {
+        font-size: 14px;
+    }
+    .card-header {
+        font-size: 16px;
+    }
+    .card-body {
+        font-size: 24px;
+    }
+    .chart-card h3 {
+        font-size: 18px;
+    }
+    .y-axis .y-label {
+        font-size: 9px;
+    }
+    /* Further reduce bar/line chart sizes if needed */
+    .bar-chart-container, .line-chart-container {
+        height: 180px;
+    }
+}

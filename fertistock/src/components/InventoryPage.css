@@ -1,0 +1,381 @@
+/* src/components/InventoryPage.css */
+
+/* --- Username Display (Moved and Renamed) --- */
+/* This style block is for the username displayed within the header,
+   not as a floating element. It will be part of the header's flexbox. */
+.username-display {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #495057; /* Darker grey for consistency */
+    background-color: transparent; /* No background */
+    padding: 0; /* No padding */
+    border-radius: 0; /* No border-radius */
+    box-shadow: none; /* No shadow */
+    margin-left: auto; /* Push it to the right within the header */
+    text-align: right;
+    white-space: nowrap; /* Prevent username from wrapping */
+}
+
+/* --- Overall Container --- */
+.inventory-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f8f9fa; /* Lighter, clean background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    color: #344767; /* Default text color */
+}
+
+/* --- Sidebar Styling --- */
+.sidebar {
+    width: 250px; /* Slightly wider sidebar */
+    background-color: #2c3e50; /* Deep blue/charcoal for sidebar */
+    color: white;
+    padding: 25px 20px; /* Adjusted padding */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+}
+
+.sidebar .logo {
+    font-size: 26px; /* Larger logo */
+    font-weight: 700; /* Bolder logo */
+    margin-bottom: 40px; /* More space below logo */
+    color: #6dd5ed; /* Bright blue accent for logo */
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+}
+
+.sidebar .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.sidebar .nav-links li {
+    margin-bottom: 12px; /* Consistent spacing */
+}
+
+.sidebar .nav-links li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px; /* More padding for clickable area */
+    color: #e0e0e0; /* Lighter text for links */
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar .nav-links li a:hover {
+    background-color: #3a506b; /* Slightly lighter blue on hover */
+    color: #ffffff;
+    transform: translateX(5px); /* Subtle slide effect on hover */
+}
+
+.sidebar .nav-links li.active a {
+    background-color: #007bff; /* Primary blue for active link */
+    color: white;
+    font-weight: 600; /* Bolder active link */
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3); /* Shadow for active link */
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Crucial for fixed table header */
+}
+
+/* --- Header Styling (Adjusted for username display) --- */
+.main-content header {
+    display: flex;
+    /* Use space-between to push the username to the right */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef; /* Light, subtle border */
+    /* Remove flex-direction: column from here if it was set previously */
+    flex-direction: row; /* Ensure it's a row layout */
+}
+
+.main-content header h2 {
+    margin: 0;
+    color: #212529; /* Darker heading color */
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.main-content header .search-filter {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    /* Adjust margin-left if needed to control spacing between username and search/filter */
+    margin-left: 20px; /* Give some space from the username */
+}
+
+.main-content header .search-filter input[type="text"],
+.main-content header .search-filter select {
+    padding: 10px 15px; /* More padding */
+    border: 1px solid #ced4da; /* Soft border */
+    border-radius: 5px; /* Standard border-radius */
+    font-size: 15px;
+    width: 200px; /* Fixed width for inputs */
+    background-color: #ffffff;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.main-content header .search-filter input[type="text"]:focus,
+.main-content header .search-filter select:focus {
+    border-color: #007bff; /* Highlight on focus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.main-content header .search-filter input[type="text"]::placeholder {
+    color: #6c757d; /* Muted placeholder color */
+}
+/* ... other CSS rules ... */
+
+.main-content header .search-filter select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* NEW ICON: Simple Down Arrow (Chevron) */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23343a40%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px; /* Adjust size if needed */
+    padding-right: 35px; /* Ensure enough space for the icon */
+}
+
+/* ... rest of your CSS ... */
+
+
+/* --- Inventory List Table Styling --- */
+.inventory-list {
+    background-color: white;
+    border-radius: 8px; /* Consistent with other cards/elements */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Modern, slightly deeper shadow */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Ensures border-radius is respected */
+    flex-grow: 1; /* Allow the table container to fill available space */
+    margin-left: 20px; /* Added left margin */
+}
+
+.inventory-list table {
+    width: 100%;
+    border-collapse: separate; /* For rounded corners on cells */
+    border-spacing: 0;
+}
+
+.inventory-list thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #f0f2f5; /* Light grey header, common in dashboards */
+    color: #52667b; /* Darker grey text for header */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    overflow: hidden; /* Important for border-radius on thead */
+}
+
+.inventory-list th {
+    text-align: left;
+    padding: 15px 20px;
+    font-weight: 600; /* Standard font-weight for headers */
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px; /* Slight letter spacing */
+}
+
+/* Specific border-radius for first/last header cells to perfect corners */
+.inventory-list th:first-child {
+    border-top-left-radius: 8px;
+}
+.inventory-list th:last-child {
+    border-top-right-radius: 8px;
+}
+
+/* Make tbody scrollable */
+.inventory-list tbody {
+    display: block; /* Make tbody a block-level element */
+    overflow-y: auto; /* Enable vertical scrolling for tbody */
+    /* Calculate height: total container height - thead height - header height - other margins */
+    max-height: calc(100vh - 270px); /* This value needs careful adjustment based on your actual layout */
+    /* If content above the table changes height, this value might need dynamic calculation via JS */
+}
+
+.inventory-list tr {
+    display: table; /* Treat rows as table rows inside a block tbody */
+    width: 100%; /* Make rows take full width */
+    table-layout: fixed; /* Fix table layout for consistent column widths */
+}
+
+.inventory-list td {
+    text-align: left;
+    padding: 14px 20px; /* Slightly more padding for rows */
+    border-bottom: 1px solid #e9ecef; /* Lighter border for body rows */
+    color: #495057; /* Slightly darker text for content */
+    font-size: 15px;
+}
+
+.inventory-list tbody tr:hover {
+    background-color: #f4f6f9; /* Subtle hover effect */
+}
+
+/* Remove bottom border from the last row in tbody */
+.inventory-list tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- Status Text Styling (for table cells - now badges!) --- */
+/* Ensure the text inside the TD is treated as a block for padding/background */
+.inventory-list td[class*="status-"] {
+    /* Use flexbox to center the text badge if needed */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align left within the cell */
+}
+
+.inventory-list td[class*="status-"] .status-text-badge {
+    padding: 4px 10px; /* Padding for the badge */
+    border-radius: 12px; /* More rounded corners for badge look */
+    font-size: 0.9em; /* Slightly smaller font for the badge */
+    font-weight: 600; /* Bolder text inside the badge */
+    white-space: nowrap; /* Prevent text from wrapping inside the badge */
+    display: inline-block; /* Ensure padding and border-radius apply well */
+}
+
+.status-good .status-text-badge {
+    color: #1a7a2e; /* Darker green for text */
+    background-color: #e6ffe6; /* Very light green background */
+}
+
+.status-near-expiry .status-text-badge {
+    color: #b08d00; /* Darker yellow/orange for text */
+    background-color: #fff9e6; /* Very light yellow background */
+}
+
+.status-expired .status-text-badge {
+    color: #a72733; /* Darker red for text */
+    background-color: #ffe6e6; /* Very light red background */
+}
+
+/* No CSS rules for option tags, keeping them native */
+
+
+.inventory-list .no-data-message {
+    color: #6c757d;
+    padding: 30px; /* More padding for empty state */
+    text-align: center;
+    font-style: italic;
+    background-color: #ffffff;
+    border-radius: 0 0 8px 8px; /* Matching bottom corners */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) { /* Adjust breakpoint for larger tablets/smaller desktops */
+    .sidebar {
+        width: 200px; /* Slightly narrower sidebar on smaller screens */
+    }
+    .main-content header .search-filter input[type="text"],
+    .main-content header .search-filter select {
+        width: 150px; /* Adjust input width */
+    }
+}
+
+@media (max-width: 768px) {
+    .inventory-container {
+        flex-direction: column;
+        height: auto; /* Allow height to adjust */
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 15px 10px; /* More padding for horizontal layout */
+        border-radius: 0 0 15px 15px; /* Rounded bottom corners for sidebar */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar .logo {
+        display: none; /* Hide logo on small screens */
+    }
+
+    .sidebar .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .sidebar .nav-links li {
+        margin-bottom: 0;
+    }
+
+    .sidebar .nav-links li a {
+        padding: 8px 12px;
+        font-size: 0.85em;
+        text-align: center;
+        justify-content: center; /* Center text if icon is removed */
+    }
+
+    .main-content {
+        padding: 20px 15px;
+    }
+
+    .main-content header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px; /* Increased gap */
+    }
+
+    .main-content header h2 {
+        /* On small screens, if username is below, remove auto margin */
+        margin-left: 0;
+        width: 100%; /* Take full width */
+        text-align: center; /* Center heading */
+    }
+
+    .username-display {
+        /* On small screens, move username below heading or integrate differently */
+        position: static; /* Remove absolute positioning */
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px; /* Add margin below username */
+        order: -1; /* Place it before the heading */
+        font-size: 1em; /* Adjust font size for mobile */
+    }
+
+    .main-content header .search-filter {
+        flex-direction: column;
+        width: 100%;
+        max-width: none;
+        gap: 10px;
+        margin-left: 0; /* Remove specific margin on small screens */
+
+    }
+    
+
+    .main-content header .search-filter input[type="text"],
+    .main-content header .search-filter select {
+        width: 100%; /* Full width inputs on mobile */
+    }
+
+    .inventory-list {
+        margin-left: 0; /* Remove the margin for smaller screens */
+    }
+
+    .inventory-list tbody {
+        /* Adjusted max-height for mobile if sidebar is at top/bottom */
+        max-height: calc(100vh - 250px); /* Fine-tune this for your mobile layout */
+    }
+}

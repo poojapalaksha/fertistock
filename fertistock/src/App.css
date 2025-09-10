@@ -1,0 +1,22 @@
+/* App.css */
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif; /* Use Inter font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f4f8; /* Light background for the whole app */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.main-content {
+  padding: 20px;
+  /* You might want to adjust this padding based on your layout */
+  min-height: calc(100vh - 60px); /* Example: Ensure content takes up full height minus header */
+}
+
+/* Add more global styles as needed */

@@ -1,0 +1,257 @@
+/* src/components/AdminDashboard.css */
+.admin-dashboard {
+    display: flex;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6; /* Light background for the dashboard */
+    min-height: 100vh; /* Ensure it takes full viewport height */
+}
+
+/* --- NEW STYLES FOR CORNER WELCOME MESSAGE --- */
+.user-corner-welcome {
+    position: absolute; /* Position relative to the nearest positioned ancestor (body/html if none) */
+    top: 20px; /* Distance from the top edge */
+    right: 30px; /* Distance from the right edge */
+    font-size: 1.1em; /* Slightly larger text */
+    font-weight: bold;
+    color: #212529; /* Dark text for visibility */
+    background-color: #f1faee; /* Light background for the badge */
+    padding: 8px 15px; /* Padding around the text */
+    border-radius: 20px; /* Rounded pill shape */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+
+.sidebar {
+    width: 220px;
+    background-color: #1d3557; /* Dark blue */
+    color: #fff;
+    padding: 20px;
+    height: 100vh; /* Full height sidebar */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: flex; /* Use flexbox for logo and nav links */
+    flex-direction: column;
+}
+
+.logo {
+    font-size: 24px; /* Slightly larger logo */
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center; /* Center the logo */
+    color: #a8dadc; /* Lighter blue for logo */
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1; /* Allows nav links to take available space */
+}
+
+.nav-links li {
+    margin: 15px 0; /* More spacing for links */
+}
+
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px; /* Add padding for clickable area */
+    display: block; /* Make the whole area clickable */
+    border-radius: 5px; /* Slightly rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.nav-links li a:hover,
+.nav-links li.active a {
+    background-color: #457b9d; /* Lighter blue on hover/active */
+    color: #f1faee; /* Even lighter text on hover */
+}
+
+.main-content {
+    flex: 1;
+    padding: 30px;
+    display: flex; /* Use flexbox for main content */
+    flex-direction: column;
+}
+
+/* --- TOP BAR Styling (Adjusted) --- */
+.top-bar {
+    display: flex;
+    justify-content: space-between; /* Pushes elements to ends */
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0; /* Separator line */
+}
+
+.top-bar h2 { /* Targeting the h2 specifically inside top-bar */
+    margin: 0; /* Remove default h2 margin */
+    color: #212529;
+    font-size: 28px;
+    border-bottom: none; /* Remove underline from h2 in top-bar */
+    padding-bottom: 0;
+}
+
+/* The .logged-in-user class will no longer be used inside top-bar */
+/* .logged-in-user {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+} */
+
+
+h2 { /* Default h2 if not inside top-bar (might not be needed now) */
+    margin-bottom: 25px;
+    color: #212529;
+    font-size: 28px;
+    border-bottom: 2px solid #a8dadc;
+    padding-bottom: 10px;
+}
+
+/* --- Add User Form Styling --- */
+.add-user-form {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    display: flex; /* Arrange items in a row */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 15px; /* Spacing between elements */
+    align-items: center;
+}
+
+.add-user-form .form-group { /* Wrapper for input + show/hide */
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Allow fields to grow */
+    min-width: 180px; /* Minimum width for inputs */
+}
+
+.add-user-form input[type="text"],
+.add-user-form input[type="password"],
+.add-user-form select {
+    flex-grow: 1; /* Make inputs fill available space */
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.add-user-form input[type="password"] {
+    padding-right: 40px; /* Space for the eye icon */
+}
+
+.add-user-form .password-toggle {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    font-size: 16px;
+    padding: 0;
+}
+
+.add-user-form select {
+    appearance: none; /* Remove default select arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M287%2C114.1L159.2%2C0.6c-1.9-1.9-4.5-2.9-7.2-2.9c-2.7%2C0-5.4%2C1-7.3%2C2.9L5.2%2C114.1c-1.9%2C1.9-2.9%2C4.5-2.9%2C7.2c0%2C2.7%2C1%2C5.4%2C2.9%2C7.3l132%2C132.1c1.9%2C1.9%2C4.5%2C2.9%2C7.2%2C2.9c2.7%2C0%2C5.4-1%2C7.3-2.9l132-132.1c1.9-1.9%2C2.9-4.5%2C2.9-7.3C289.9%2C118.5%2C288.9%2C115.9%2C287%2C114.1z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px; /* Space for custom arrow */
+}
+
+
+.add-user-form button {
+    padding: 10px 20px;
+    background-color: #2a9d8f; /* Greenish teal */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.add-user-form button:hover {
+    background-color: #264653; /* Darker blue on hover */
+}
+
+/* --- Users Table Styling --- */
+.user-table {
+    width: 100%;
+    border-collapse: separate; /* Use separate for rounded corners */
+    border-spacing: 0; /* Remove space between cells */
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 20px;
+    background-color: #ffffff;
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensures content respects border-radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.user-table th,
+.user-table td {
+    padding: 15px 20px; /* More padding for better spacing */
+    border-bottom: 1px solid #eee; /* Lighter border */
+    text-align: left;
+}
+
+.user-table th {
+    background-color: #a8dadc; /* Light blue header */
+    color: #1d3557; /* Dark text for header */
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* Rounded corners for first/last header cells */
+.user-table th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.user-table th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.user-table tr:last-child td {
+    border-bottom: none; /* No border for the last row */
+}
+
+.user-table tbody tr:hover {
+    background-color: #f1faee; /* Very light green on row hover */
+}
+
+.delete-button {
+    background-color: #e63946; /* Red for delete */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #c7001c; /* Darker red on hover */
+}
+
+/* Styling for the dropdown wrapper to align button */
+.dropdown-wrapper {
+    display: flex;
+    gap: 15px; /* Space between select and button */
+    flex-grow: 1;
+    min-width: 200px; /* Ensure select and button have enough space */
+}
+
+.dropdown-wrapper select {
+    flex-grow: 1;
+}

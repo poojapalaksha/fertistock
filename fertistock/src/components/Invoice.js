@@ -1,0 +1,174 @@
+import React, { useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import html2canvas from 'html2canvas'; // For converting HTML to canvas/image
+import jsPDF from 'jspdf';           // For generating PDF from canvas/image
+import './Invoice.css';
+
+function Invoice() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const invoiceRef = useRef(); // Create a ref to target the invoice content for PDF/print
+
+  // Destructure invoice data from location.state safely
+  const invoice = location.state?.invoice || null;
+
+  if (!invoice) {
+    return (
+      <div className="invoice-page-wrapper">
+        <div className="invoice-container no-invoice">
+          <h2>No invoice data available.</h2>
+          <button className="back-button" onClick={() => navigate('/sales')}>Back to Sales</button>
+        </div>
+      </div>
+    );
+  }
+
+  // Prioritize using pre-calculated totals if available from sales page,
+  // otherwise recalculate to ensure data integrity.
+  const subtotal = invoice.subtotal !== undefined
+    ? Number(invoice.subtotal)
+    : invoice.items?.reduce((sum, item) => {
+        const price = Number(item.price) || 0;
+        const quantity = Number(item.quantity) || 0;
+        return sum + price * quantity;
+      }, 0) || 0;
+
+  const taxRate = 0.18; // Ensure this matches your sales page
+  const tax = invoice.tax !== undefined
+    ? Number(invoice.tax)
+    : subtotal * taxRate;
+
+  const grandTotal = invoice.grandTotal !== undefined
+    ? Number(invoice.grandTotal)
+    : subtotal + tax;
+
+  // Function to handle downloading the invoice as a PDF, ensuring single-page fit
+  const handleDownloadPdf = () => {
+    // html2canvas takes a DOM element and renders it to a canvas
+    // scale: 2 for better resolution, useCORS: true for handling external images if any
+    html2canvas(invoiceRef.current, { scale: 2, useCORS: true }).then(canvas => {
+      const imgData = canvas.toDataURL('image/png'); // Get image data from canvas
+      const pdf = new jsPDF('p', 'mm', 'a4'); // Initialize jsPDF: 'p' (portrait), 'mm' (units), 'a4' (size)
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();   // A4 width in mm (210mm)
+      const pdfHeight = pdf.internal.pageSize.getHeight(); // A4 height in mm (297mm)
+
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+
+      // Calculate aspect ratio to fit the entire image within the PDF page
+      // This ensures the entire content is visible on one page, scaled down if too large
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+
+      const newImgWidth = imgWidth * ratio;
+      const newImgHeight = imgHeight * ratio;
+
+      // Center the image on the PDF page (optional, but often looks better)
+      const x = (pdfWidth - newImgWidth) / 2;
+      const y = (pdfHeight - newImgHeight) / 2;
+
+      pdf.addImage(imgData, 'PNG', x, y, newImgWidth, newImgHeight);
+      pdf.save(`Invoice_${invoice.customerName || 'Customer'}_${new Date(invoice.date).toLocaleDateString().replace(/\//g, '-')}.pdf`);
+    });
+  };
+
+  // Function to trigger browser print dialog
+  const handlePrint = () => {
+    // This approach isolates the print content for better control
+    const originalContents = document.body.innerHTML;
+    const printContents = invoiceRef.current.outerHTML; // Get the outer HTML of the invoice container
+
+    document.body.innerHTML = printContents; // Replace body content with only invoice for printing
+    window.print(); // Trigger print dialog
+    document.body.innerHTML = originalContents; // Restore original content
+    window.location.reload(); // Reload to reattach event listeners and state (important for React apps)
+  };
+
+  return (
+    <div className="invoice-page-wrapper">
+      <div className="invoice-container" ref={invoiceRef}> {/* The entire invoice content wrapped in a ref */}
+
+        <div className="invoice-header-company">
+          <h2>Sri Anjaneya Agro Centre</h2>
+          <p>Agricultural Fertilizers & Supplies</p>
+          <p>Surve No. 120/1A1,Near Allana Coffee Curing, H N Pura Road,Kanchanahalli. HAssan</p>
+          <p>Phone: +91 98765 43210 | Email: info@fertistock.com</p>
+        </div>
+
+        <h2 className="invoice-title">TAX INVOICE</h2>
+
+        <div className="invoice-details-grid">
+          <div><strong>Invoice No:</strong></div>
+          <div>{invoice.invoiceNumber || 'INV-' + Math.floor(100000 + Math.random() * 900000)}</div>
+          <div><strong>Date:</strong></div>
+          <div>{new Date(invoice.date || Date.now()).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
+          <div><strong>Customer Name:</strong></div>
+          <div>{invoice.customerName || 'N/A'}</div>
+          <div><strong>Mobile Number:</strong></div>
+          <div>{invoice.mobileNumber || 'N/A'}</div>
+          {/* Display Generated By user name */}
+          {/* <div><strong>Generated By:</strong></div> */}
+          {/* <div>{invoice.userName || 'System'}</div> Display the passed user name */}
+        </div>
+
+        <table className="invoice-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th className="text-right">Unit Price (₹)</th>
+              <th className="text-right">Total (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {invoice.items && invoice.items.length > 0 ? (
+              invoice.items.map((item, index) => {
+                const price = Number(item.price) || 0;
+                const quantity = Number(item.quantity) || 0;
+                return (
+                  <tr key={index}>
+                    <td>{item.name || 'Unknown'}</td>
+                    <td>{quantity}</td>
+                    <td className="text-right">{price.toFixed(2)}</td>
+                    <td className="text-right">{(price * quantity).toFixed(2)}</td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan="4" className="text-center">No items found.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+
+        <div className="invoice-totals">
+          <div className="total-item">
+            <span>Subtotal:</span><span>₹ {subtotal.toFixed(2)}</span>
+          </div>
+          <div className="total-item">
+            <span>Tax (18%):</span><span>₹ {tax.toFixed(2)}</span>
+          </div>
+          <div className="total-item grand-total">
+            <span>Grand Total:</span><span>₹ {grandTotal.toFixed(2)}</span>
+          </div>
+        </div>
+
+        <div className="invoice-footer">
+          <p>Thank you for your business!</p>
+          <div className="signature-line"></div>
+          <p>Authorized Signature</p>
+        </div>
+      </div>
+
+      {/* Action buttons outside the invoice container so they are not part of the PDF/print */}
+      <div className="invoice-actions">
+        <button className="back-button" onClick={() => navigate('/sales')}>Back to Sales</button>
+        <button className="download-button" onClick={handleDownloadPdf}>Download Invoice (PDF)</button>
+        <button className="print-button" onClick={handlePrint}>Print Invoice</button>
+      </div>
+    </div>
+  );
+}
+
+export default Invoice;

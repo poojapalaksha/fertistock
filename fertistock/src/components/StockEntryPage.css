@@ -1,0 +1,104 @@
+/* StockEntryPage.css - Modified for global CSS (no modules) */
+.stockEntryContainer {
+    padding: 20px;
+    background-color: #f7fafc;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stockEntryTitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1a202c;
+    margin-bottom: 8px;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+}
+
+.stockEntryDescription {
+    color: #718096;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+}
+
+.stockEntryForm {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.formGroup {
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 8px;
+}
+
+.input, .select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #2d3748;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.input:focus, .select:focus {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+}
+
+.select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' fill='%239ca3af'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    padding-right: 30px;
+}
+
+.error {
+    color: #e53e3e;
+    font-size: 12px;
+    margin-top: 4px;
+    text-align: left;
+}
+
+.addToInventoryButton {
+    background-color: #38a169 !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border: none !important;
+    border-radius: 4px !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease !important;
+    margin-top: 20px !important;
+    width: fit-content !important;
+    margin-left: auto !important;
+    display: block !important;
+}
+
+.addToInventoryButton:hover {
+    background-color: #2d684c !important;
+}

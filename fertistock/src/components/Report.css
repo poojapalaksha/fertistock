@@ -1,0 +1,224 @@
+/* Report.css */
+
+.report-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f7f6; /* Light background for the whole page */
+    min-height: 100vh;
+}
+
+.report-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.report-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 20px;
+}
+
+.report-header h2 {
+    color: #2c3e50;
+    font-size: 2.2em;
+    margin-bottom: 5px;
+}
+
+.report-header h3 {
+    color: #34495e;
+    font-size: 1.5em;
+    margin-top: 0;
+    font-weight: normal;
+}
+
+.company-info {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.company-address,
+.company-contact {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 3px;
+}
+
+.report-summary {
+    background-color: #eaf4f2;
+    border-left: 5px solid #28a745;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+}
+
+.report-summary p {
+    margin: 0;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.report-table th,
+.report-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.report-table th {
+    background-color: #f8f8f8;
+    color: #333;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.report-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.report-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.report-table .text-right {
+    text-align: right;
+}
+
+.item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item-list li {
+    margin-bottom: 4px;
+    font-size: 0.95em;
+    color: #555;
+}
+
+.no-report-data {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 1.2em;
+    color: #777;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.report-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.report-actions button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.report-actions button:hover {
+    transform: translateY(-2px);
+}
+
+.back-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+}
+
+.download-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.download-button:hover {
+    background-color: #0056b3;
+}
+
+.print-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.print-button:hover {
+    background-color: #218838;
+}
+
+/* Print specific styles */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+    }
+
+    .report-page-wrapper {
+        padding: 0;
+        box-shadow: none;
+        background-color: #fff;
+        align-items: flex-start; /* Align content to start on print */
+        page-break-after: always; /* Ensure each report prints on a new page if part of a larger document */
+    }
+
+    .report-container {
+        box-shadow: none;
+        border: none;
+        padding: 20mm; /* Standard print padding */
+        max-width: 100%; /* Use full width for print */
+        margin-bottom: 0;
+    }
+
+    .report-actions {
+        display: none; /* Hide buttons when printing */
+    }
+
+    .report-header,
+    .report-summary,
+    .report-table {
+        margin-bottom: 15px; /* Adjust spacing for print */
+    }
+
+    /* Ensure table rows don't break across pages */
+    .report-table tr {
+        page-break-inside: avoid;
+    }
+
+    .item-list {
+        page-break-inside: avoid;
+    }
+}

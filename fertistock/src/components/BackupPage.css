@@ -1,0 +1,304 @@
+.backup-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f0f4f8; /* Light background */
+}
+
+.sidebar {
+  width: 240px; /* Adjusted sidebar width */
+  background-color: #2d3748; /* Dark gray sidebar */
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #34c38f; /* Green logo */
+}
+
+.sidebar .nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar .nav-links li {
+  margin-bottom: 10px;
+}
+
+.sidebar .nav-links li a {
+  display: flex; /* Use flexbox for icon alignment */
+  align-items: center;
+  padding: 10px;
+  color: #a0aec0; /* Light gray text */
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar .nav-links li a:hover {
+  background-color: #4a5568; /* Darker hover background */
+  color: white;
+}
+
+.sidebar .nav-links li.active a {
+  background-color: #4a5568; /* Active link background */
+  color: white;
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.main-content header {
+  display: flex;
+  justify-content: space-between; /* Space between title and admin info */
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.main-content header h2 {
+  margin: 0;
+  color: #1a202c; /* Very dark gray title */
+  font-size: 24px;
+}
+
+.main-content header .admin-info {
+  display: flex;
+  align-items: center;
+  color: #718096; /* Gray admin info text */
+}
+
+.main-content header .admin-info .user-avatar {
+  /* Style for user avatar (if you have one) */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #cbd5e0;
+  margin-left: 10px;
+}
+
+.backup-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  margin-bottom: 20px;
+}
+
+.backup-section h3 {
+  display: flex; /* Use flexbox for icon alignment */
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #1a202c;
+  font-size: 18px;
+}
+
+.backup-section h3 svg {
+  margin-right: 8px; /* Space for the database icon */
+  color: #34c38f; /* Green database icon */
+}
+
+
+.backup-actions {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.backup-actions button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.backup-actions .backup-now-button {
+  background-color: #34c38f; /* Green backup button */
+  color: white;
+  margin-right: 10px;
+}
+
+.backup-actions .backup-now-button:hover {
+  background-color: #248a66; /* Darker green on hover */
+}
+
+.backup-actions .download-backup-button {
+  background-color: #f0f4f8; /* Light gray button */
+  color: #1a202c;
+  border: 1px solid #d0d5dd;
+}
+
+.backup-actions .download-backup-button:hover {
+  background-color: #edf2f7; /* Slightly darker hover */
+}
+
+.backup-actions .download-backup-button svg{
+    margin-right: 5px;
+    color: #34c38f;
+}
+
+.backup-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  background-color: #f7fafc; /* Very light gray info background */
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.backup-info .info-item {
+  display: flex;
+  justify-content: space-between;
+  color: #4a5568; /* Medium gray text */
+  font-size: 14px;
+}
+
+.backup-info .info-item span:first-child {
+  font-weight: 500; /* Bold for label */
+}
+
+/* System Logs Styles */
+.system-logs {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.system-logs h3 {
+  display: flex; /* Use flexbox for icon alignment */
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #1a202c;
+  font-size: 18px;
+}
+
+.system-logs h3 svg {
+  margin-right: 8px; /* Space for the logs icon */
+  color: #4299e1; /* Blue logs icon */
+}
+
+.logs-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  overflow-x: auto; /* Handle horizontal overflow for small screens */
+}
+
+.logs-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+.logs-table thead tr {
+  background-color: #edf2f7; /* Very light gray header */
+}
+
+.logs-table th, .logs-table td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0; /* Light border */
+}
+
+.logs-table th {
+  font-weight: 600; /* Semi-bold header text */
+  color: #4a5568;
+}
+
+.logs-table tbody tr:hover {
+  background-color: #f7fafc; /* Lightest gray on hover */
+}
+
+.logs-table .status-success {
+  color: #38a169; /* Green for success */
+}
+
+.logs-table .status-failed {
+  color: #e53e3e; /* Red for failed */
+}
+
+.logs-table .status-warning {
+  color: #ed8936; /* Orange for warning */
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  margin: 0 5px;
+  border: 1px solid #d0d5dd;
+  border-radius: 6px;
+  background-color: white;
+  color: #4a5568;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #f7fafc; /* Lighter hover */
+}
+
+.pagination button.active {
+  background-color: #34c38f; /* Green active button */
+  color: white;
+  border-color: #34c38f;
+}
+
+.pagination button:disabled {
+  background-color: #edf2f7;
+  color: #a0aec0;
+  cursor: not-allowed;
+  border-color: #edf2f7;
+}
+
+
+/* Responsive adjustments (optional - adjust as needed) */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    z-index: 10;
+  }
+
+  .sidebar .nav-links {
+    display: flex;
+  }
+
+  .sidebar .nav-links li {
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+  .main-content {
+        padding-left: 10px;
+        padding-right: 10px;
+  }
+  .logs-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+}

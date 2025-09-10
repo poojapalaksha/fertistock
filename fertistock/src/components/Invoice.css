@@ -1,0 +1,259 @@
+/* Invoice.css */
+
+/* Overall page wrapper if needed */
+.invoice-page-wrapper {
+    background-color: #f8f8f8; /* Light background for the overall page */
+    padding: 20px; /* Reduced padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the invoice content */
+    min-height: 100vh;
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+/* Main Invoice Container - The 'receipt' itself */
+.invoice-container {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    padding: 25px 20px; /* Adjusted padding, slightly less */
+    width: 100%; /* Take full width up to max-width */
+    max-width: 450px; /* Slightly narrower for single sheet */
+    margin-bottom: 25px; /* Space between invoice and buttons */
+    font-family: 'Roboto', sans-serif; /* Ensure Roboto is available or fallback to system sans-serif */
+    color: #333;
+    line-height: 1.5; /* Slightly tighter line height */
+    box-sizing: border-box;
+}
+
+/* Style for when no invoice data is available */
+.invoice-container.no-invoice {
+    text-align: center;
+    padding: 40px; /* Reduced padding */
+}
+.invoice-container.no-invoice h2 {
+    color: #cc0000;
+}
+.invoice-container.no-invoice button {
+    margin-top: 15px;
+}
+
+/* Company Header Section */
+.invoice-header-company {
+    text-align: center;
+    margin-bottom: 25px; /* Reduced margin */
+    padding-bottom: 15px; /* Reduced padding */
+    border-bottom: 1px solid #eee; /* Subtle separator */
+}
+.invoice-header-company h2 {
+    font-size: 24px; /* Slightly smaller */
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 3px; /* Reduced margin */
+    margin-top: 0;
+}
+.invoice-header-company p {
+    font-size: 13px; /* Smaller font size */
+    color: #666;
+    margin: 2px 0; /* Reduced margin */
+}
+
+/* Invoice Title */
+.invoice-title {
+    text-align: center;
+    font-size: 20px; /* Slightly smaller */
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px; /* Reduced margin */
+    padding-bottom: 10px; /* Reduced padding */
+    border-bottom: 2px solid #ccc;
+    text-transform: uppercase;
+}
+
+/* Customer Details Grid */
+.invoice-details-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 12px; /* Reduced gap */
+    margin-bottom: 20px; /* Reduced margin */
+    font-size: 14px; /* Slightly smaller font */
+}
+.invoice-details-grid strong {
+    color: #444;
+}
+
+/* Invoice Table */
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Reduced margin */
+    font-size: 13px; /* Smaller font size for table content */
+    border-top: 1px solid #ddd;
+    border-bottom: 2px dashed #ccc;
+    margin-bottom: 20px; /* Reduced margin */
+}
+
+.invoice-table thead tr {
+    background-color: #f9f9f9;
+}
+
+.invoice-table th,
+.invoice-table td {
+    border: none;
+    border-bottom: 1px dashed #eee;
+    padding: 8px 5px; /* Reduced padding */
+    vertical-align: top;
+    color: #444;
+}
+
+.invoice-table th {
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: left;
+}
+
+.invoice-table th:first-child,
+.invoice-table td:first-child {
+    text-align: left;
+}
+.invoice-table th:nth-child(2),
+.invoice-table td:nth-child(2) {
+    text-align: center;
+}
+.invoice-table th.text-right,
+.invoice-table td.text-right {
+    text-align: right;
+}
+
+.invoice-table tbody tr:hover {
+    background-color: transparent;
+}
+.invoice-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Invoice Totals Section */
+.invoice-totals {
+    margin-top: 20px; /* Reduced margin */
+    padding-top: 15px; /* Reduced padding */
+    border-top: 2px dashed #ccc;
+    text-align: right;
+}
+
+.invoice-totals .total-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px; /* Reduced margin */
+    font-size: 15px; /* Slightly smaller */
+    color: #555;
+}
+
+.invoice-totals .total-item span:first-child {
+    font-weight: 600;
+    color: #333;
+}
+
+.invoice-totals .grand-total {
+    font-size: 18px; /* Slightly smaller */
+    font-weight: bold;
+    color: #28a745;
+    border-top: 1px dashed #ccc;
+    padding-top: 8px; /* Reduced padding */
+    margin-top: 12px; /* Reduced margin */
+}
+
+/* Invoice Footer (Thank you message, signature) */
+.invoice-footer {
+    text-align: center;
+    margin-top: 30px; /* Reduced margin */
+    padding-top: 15px; /* Reduced padding */
+    border-top: 1px solid #eee;
+    font-size: 13px; /* Smaller font */
+    color: #777;
+}
+.invoice-footer p {
+    margin: 4px 0; /* Reduced margin */
+}
+.invoice-footer .signature-line {
+    border-bottom: 1px solid #aaa;
+    width: 60%;
+    margin: 25px auto 8px auto; /* Reduced margin */
+}
+
+/* Action Buttons */
+.invoice-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px; /* Reduced gap */
+    margin-top: 25px; /* Reduced margin */
+    width: 100%;
+    max-width: 450px;
+}
+
+.invoice-actions button {
+    padding: 10px 18px; /* Reduced padding */
+    font-size: 15px; /* Slightly smaller font */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    flex: 1;
+    max-width: 160px; /* Adjusted max-width */
+}
+
+.invoice-actions .back-button {
+    background-color: #6c757d;
+    color: white;
+}
+.invoice-actions .back-button:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.invoice-actions .download-button {
+    background-color: #007bff;
+    color: white;
+}
+.invoice-actions .download-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.invoice-actions .print-button {
+    background-color: #28a745;
+    color: white;
+}
+.invoice-actions .print-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* Print Specific Styles */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #fff !important;
+        /* Force single page print behavior for web content, though PDF is preferred for exact control */
+        overflow: hidden; /* Hide scrollbars if content overflows */
+    }
+    .invoice-page-wrapper {
+        padding: 0;
+        box-shadow: none !important;
+        background-color: #fff !important;
+        align-items: flex-start;
+    }
+    .invoice-container {
+        width: 100%;
+        max-width: 100%; /* Full width on print */
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0;
+        padding: 15px; /* Adjusted padding for print */
+    }
+    .invoice-actions {
+        display: none !important; /* Hide buttons when printing */
+    }
+}

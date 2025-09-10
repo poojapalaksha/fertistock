@@ -1,0 +1,340 @@
+/* NotificationsPage.css */
+
+.notifications-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f0f4f8; /* Light background for the page */
+    margin-left: 30px;
+}
+
+.sidebar {
+    width: 240px;
+    background-color: #2d3748; /* Darker sidebar background */
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.sidebar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #34c38f; /* Accent green for the logo */
+}
+
+.sidebar .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar .nav-links li {
+    margin-bottom: 10px;
+}
+
+.sidebar .nav-links li a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #a0aec0; /* Lighter gray for inactive links */
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar .nav-links li a:hover {
+    background-color: #4a5568; /* Darker gray on hover */
+    color: white;
+}
+
+.sidebar .nav-links li.active a {
+    background-color: #4a5568; /* Darker gray for active link */
+    color: white;
+    font-weight: bold; /* Make active link text bolder */
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto; /* Enable scrolling for main content if it overflows */
+}
+
+.main-content header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0; /* Subtle line below header */
+    padding-bottom: 15px;
+}
+
+.main-content header h2 {
+    margin: 0 0 20px 0;
+    color: #1a202c; /* Dark text for main heading */
+    font-size: 28px; /* Slightly larger heading */
+    font-weight: 700;
+}
+
+.main-content header .notification-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+}
+
+.main-content header .notification-tabs button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #edf2f7; /* Light gray for inactive tabs */
+    color: #4a5568; /* Darker gray text for inactive tabs */
+    transition: background-color 0.2s ease, color 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.main-content header .notification-tabs button:hover {
+    background-color: #e2e8f0; /* Slightly darker gray on hover */
+}
+
+.main-content header .notification-tabs button.active {
+    background-color: #34c38f; /* Green for active tab */
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Stronger shadow for active tab */
+}
+
+.notifications-list {
+    background-color: transparent; /* Changed to transparent as items now have their own background */
+    padding: 0; /* Changed to 0 as items will manage their own spacing/padding within themselves */
+    border-radius: 12px; /* Still apply to the container if it has a visual role */
+    box-shadow: none; /* Removed container shadow as individual items will have it */
+    display: flex; /* Use flexbox to easily control gap if needed, though margin-bottom is used below */
+    flex-direction: column;
+    gap: 15px; /* Use gap for consistent spacing instead of margin-bottom for last item */
+}
+
+.notifications-list .notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px; /* Padding inside each notification item */
+    background-color: white; /* Each notification item now has its own white background */
+    border-radius: 8px; /* Rounded corners for each notification item */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Distinct box shadow for each item */
+    border-bottom: none; /* Removed individual border as shadow/gap provides separation */
+   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for hover effects */
+}
+
+/* Remove last-child border-bottom as it's no longer needed with gap */
+.notifications-list .notification-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0; /* Ensure no extra margin for the last item if using gap on parent */
+}
+
+
+.notifications-list .notification-item:hover {
+    transform: translateY(-2px); /* Gives a subtle lift effect */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); /* Stronger shadow on hover */
+}
+
+.notifications-list .notification-item .notification-details {
+    flex: 1;
+    margin-right: 15px; /* Increased margin for details */
+    color: #4a5568; /* Default text color for details */
+}
+
+.notifications-list .notification-item .notification-details strong {
+    color: #1a202c; /* Darker text for notification title */
+    font-size: 16px;
+    display: block; /* Ensure title takes its own line */
+    margin-bottom: 5px;
+}
+
+.notifications-list .notification-item .notification-details .time {
+    display: block;
+    font-size: 12px;
+    color: #a0aec0; /* Lighter gray for time */
+    margin-top: 5px;
+}
+
+.notifications-list .notification-item .notification-actions {
+    display: flex;
+    gap: 8px; /* Slightly reduced gap between action buttons */
+    flex-shrink: 0; /* Prevent actions from shrinking */
+}
+
+.notifications-list .notification-item .notification-actions button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 600; /* Make button text a bit bolder */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Relevant button colors based on common UI/UX patterns */
+/* 1st Button: Primary / Success Action (e.g., Mark as Read) */
+.notifications-list .notification-item .notification-actions button:first-child {
+    background-color: #28a745; /* Success Green */
+    color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.notifications-list .notification-item .notification-actions button:first-child:hover {
+    background-color: #218838; /* Darker green on hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* 2nd Button: Secondary / Neutral Action (e.g., Dismiss) */
+.notifications-list .notification-item .notification-actions button:nth-child(2) {
+    background-color: #6c757d; /* Muted Gray */
+    color: white;
+    border: 1px solid #6c757d;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.notifications-list .notification-item .notification-actions button:nth-child(2):hover {
+    background-color: #5a6268; /* Darker gray on hover */
+    border-color: #545b62;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 3rd Button: Info / Call-to-action (e.g., View Details) */
+.notifications-list .notification-item .notification-actions button:nth-child(3) {
+    background-color: #007bff; /* Primary Blue */
+    color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.notifications-list .notification-item .notification-actions button:nth-child(3):hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* 4th Button: Danger / Destructive Action (e.g., Delete) */
+.notifications-list .notification-item .notification-actions button:nth-child(4) {
+    background-color: #dc3545; /* Danger Red */
+    color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.notifications-list .notification-item .notification-actions button:nth-child(4):hover {
+    background-color: #c82333; /* Darker red on hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.notifications-list p {
+    color: #718096; /* Gray text for no notifications message */
+    padding: 20px; /* More padding for visibility */
+    text-align: center;
+    font-style: italic;
+    background-color: white; /* Ensure message has a background */
+    border-radius: 8px; /* Rounded corners for the message box */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for the message box */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .notifications-container {
+        flex-direction: column; /* Stack sidebar and main content vertically */
+        height: auto; /* Allow height to adjust */
+        min-height: 100vh; /* Ensure it takes at least full viewport height */
+    }
+
+    .sidebar {
+        width: 100%;
+        position: fixed; /* Fix sidebar to the bottom for mobile */
+        bottom: 0;
+        left: 0;
+        top: auto; /* Override top: 0 from desktop */
+        height: auto;
+        padding: 10px 0; /* Adjust padding for bottom bar */
+        flex-direction: row; /* Horizontal navigation */
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15); /* Shadow above the bar */
+        border-top-left-radius: 10px; /* Rounded top corners for bottom bar */
+        border-top-right-radius: 10px;
+        z-index: 1000; /* Ensure it's on top */
+    }
+
+    .sidebar .logo {
+        display: none; /* Hide logo on mobile for compact bar */
+    }
+
+    .sidebar .nav-links {
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .sidebar .nav-links li {
+        margin-bottom: 0;
+        margin-right: 0; /* Remove horizontal margin */
+        flex: 1; /* Distribute links evenly */
+        text-align: center;
+    }
+
+    .sidebar .nav-links li a {
+        flex-direction: column; /* Stack icon and text vertically */
+        font-size: 0.75rem; /* Smaller font for mobile tabs */
+        padding: 0.5rem 0.25rem;
+    }
+
+    .main-content {
+        padding: 15px; /* Reduced padding for smaller screens */
+        padding-bottom: 70px; /* Add padding to prevent content hiding behind fixed bottom bar */
+    }
+
+    .main-content header h2 {
+        font-size: 22px;
+    }
+
+    .main-content header .notification-tabs {
+        flex-direction: column; /* Stack tabs vertically on smaller screens */
+        gap: 8px;
+    }
+
+    .main-content header .notification-tabs button {
+        width: 100%; /* Full width for tabs */
+    }
+
+    .notifications-list .notification-item {
+        flex-direction: column; /* Stack notification details and actions vertically */
+        align-items: flex-start;
+        padding: 12px;
+    }
+
+    .notifications-list .notification-item .notification-details {
+        margin-right: 0;
+        margin-bottom: 10px; /* Add space below details when stacked */
+    }
+
+    .notifications-list .notification-item .notification-actions {
+        width: 100%; /* Make actions take full width */
+        justify-content: flex-start; /* Align action buttons to the left */
+        flex-wrap: wrap; /* Allow buttons to wrap if needed */
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 10px;
+    }
+
+    .main-content header h2 {
+        font-size: 20px;
+    }
+
+    .notifications-list .notification-item {
+        padding: 10px;
+    }
+
+    .notifications-list .notification-item .notification-actions button {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+}

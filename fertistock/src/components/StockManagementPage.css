@@ -1,0 +1,453 @@
+/* src/components/StockManagementPage.css */
+
+/* Base Container for the Stock Management Page */
+.stock-management-container {
+    display: flex;
+    height: 100vh; /* Ensures the container takes full viewport height */
+    background-color: #f3f4f6; /* bg-gray-100 - light background for the page */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Consistent font */
+    color: #374151; /* Default text color */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 240px; /* w-64 */
+    background-color: #374151; /* bg-gray-800 - dark charcoal background */
+    color: white;
+    padding: 1rem; /* p-4 */
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+}
+
+.sidebar .logo {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: bold;
+    margin-bottom: 2rem; /* mb-8 */
+    color: #10b981; /* A nice green accent for the logo */
+    text-align: center;
+}
+
+.sidebar .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar .nav-links li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar .nav-links li:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar .nav-links li a {
+    display: block;
+    padding: 0.5rem; /* p-2 */
+    border-radius: 0.375rem; /* rounded-md */
+    color: white;
+    text-decoration: none;
+    display: flex; /* For icon and text alignment */
+    align-items: center;
+    transition: background-color 0.2s ease, transform 0.1s ease; /* Smooth hover */
+}
+
+.sidebar .nav-links li a:hover {
+    background-color: #4b5563; /* hover:bg-gray-700 */
+    transform: translateX(3px); /* Slight slide on hover */
+}
+
+.sidebar .nav-links li.active a {
+    background-color: #4b5563; /* bg-gray-700 */
+    border-radius: 0.375rem;
+    font-weight: 600; /* Make active link text bolder */
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1; /* Allows the main content to take remaining space */
+    padding: 1.5rem; /* p-6 */
+    overflow-y: auto; /* Enables scrolling for the main content area */
+}
+
+/* Header in Main Content */
+header {
+    margin-bottom: 2rem; /* mb-8 */
+    padding-bottom: 1rem; /* Space below header text */
+    border-bottom: 1px solid #e5e7eb; /* Subtle line below header */
+}
+
+header h2 {
+    font-size: 1.875rem; /* text-3xl, slightly larger than 1.5rem for page title */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 0.5rem;
+    color: #1f2937; /* Darker text for main heading */
+}
+
+header p {
+    color: #6b7280; /* text-gray-500 */
+    font-size: 0.95rem;
+}
+
+/* Stock Actions Section (Search, Filter, Add Button) */
+.stock-actions {
+    display: flex;
+    justify-content: space-between; /* space-between */
+    align-items: center;
+    margin-top: 1rem; /* mt-4 */
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    gap: 1.5rem; /* **UPDATED: Increased gap to create space between search and date input** */
+    margin-bottom: 2rem; /* Space below action bar before table */
+}
+
+/* Search Bar Styling */
+.search-bar {
+    position: relative;
+    width: 280px; /* Increased width for search input */
+    flex-shrink: 0; /* Prevent search bar from shrinking */
+    margin-right: 40px;
+}
+
+.search-bar input {
+    padding: 0.6rem 1rem 0.6rem 2.5rem; /* pl-8 + increased top/bottom padding */
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px solid #d1d5db;
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #3b82f6; /* Focus color for border */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25); /* Subtle blue glow on focus */
+}
+
+.search-bar svg {
+    position: absolute;
+    left: 0.75rem; /* left-2.5 */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for perfect vertical centering */
+    height: 1rem; /* h-4 */
+    width: 1rem; /* w-4 */
+    color: #6b7280; /* text-gray-500 */
+}
+
+/* Date Filter Styling */
+.date-filter input {
+    border-radius: 0.375rem;
+    border: 1px solid #d1d5db;
+    padding: 0.6rem 1rem; /* Consistent padding */
+    font-size: 0.875rem;
+    width: 180px;
+    background-color: white; /* Ensure consistent background */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    margin-left: 10px;
+}
+
+.date-filter input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+/* Search and Reset Button Container */
+.search-buttons {
+    display: flex;
+    gap: 0.5rem; /* Space between search and reset buttons */
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+/* Base Button Style for both Search and Reset */
+.search-button,
+.reset-button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+    display: inline-flex; /* Allows text and potential icon to align */
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem; /* Space for icon if added */
+}
+
+/* Specific style for the Search Button */
+.search-button {
+    background-color: #3b82f6; /* bg-blue-500 */
+    color: white;
+    border: 1px solid #3b82f6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.search-button:hover {
+    background-color: #2563eb; /* hover:bg-blue-600 */
+    border-color: #2563eb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+/* Specific style for the Reset Button */
+.reset-button {
+    background-color: white;
+    color: #4b5563; /* text-gray-700 */
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Lighter shadow */
+}
+
+.reset-button:hover {
+    background-color: #f3f4f6; /* hover:bg-gray-100 */
+    border-color: #9ca3af; /* A bit darker border on hover */
+    color: #1f2937; /* Darker text on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Add Stock Button Styling */
+.add-stock-button {
+    background-color: #10b981; /* bg-green-500 */
+    color: white;
+    font-weight: 600; /* font-semibold */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    border-radius: 0.375rem; /* rounded-md */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex; /* For icon and text alignment */
+    align-items: center;
+    gap: 0.5rem; /* Space between icon and text */
+    border: none; /* Remove default button border */
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Soft shadow */
+}
+
+.add-stock-button:hover {
+    background-color: #059669; /* hover:bg-green-600 */
+    transform: translateY(-1px); /* Slight lift on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Stock History Table Container */
+.stock-history {
+    margin-top: 2rem;
+    /* **UPDATED: Added left margin for the table** */
+    margin-left: 20px; /* Adjust this value as needed for desired spacing */
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06); /* Tailwind's default shadow */
+    overflow-x: auto; /* Enables horizontal scrolling for the table on small screens */
+    border: 1px solid #e5e7eb; /* A subtle border around the card */
+}
+
+.stock-history table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures borders merge nicely */
+}
+
+.stock-history thead {
+    /* **UPDATED: Header background color and bottom border for the table header** */
+    background-color: #e0f2f7; /* Light blue/cyan color for the header background */
+    border-bottom: 2px solid #a3e0f0; /* Slightly darker border to match the header background */
+    /* **NEW: Styles to make the header sticky** */
+    position: sticky;
+    top: 0; /* Sticks to the top of its scrolling container (main-content in this case) */
+    z-index: 10; /* Ensures the header is above scrolling table body content */
+}
+
+.stock-history thead th {
+    padding: 0.75rem 1.5rem; /* px-6 py-3 */
+    text-align: left;
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 600; /* font-semibold for header */
+    color: #374151; /* Darker text for better contrast on the colored header */
+    text-transform: uppercase; /* uppercase */
+    letter-spacing: 0.05em; /* tracking-wider, adjusted slightly */
+    /* Remove individual cell bottom borders as thead has a single strong border */
+    border-bottom: none;
+}
+
+.stock-history tbody td {
+    padding: 0.75rem 1.5rem; /* px-6 py-4 */
+    font-size: 0.875rem; /* text-sm */
+    color: #374151; /* Darker text for cell content */
+    border-bottom: 1px solid #e5e7eb; /* Lighter border for individual rows */
+}
+
+/* **UPDATED: Table Row Colors** */
+.stock-history tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* White background for odd rows */
+}
+
+.stock-history tbody tr:nth-child(even) {
+    background-color: #fcfdfe; /* Very light blue/off-white for even rows */
+}
+
+.stock-history tbody tr:last-child td {
+    border-bottom: none; /* Remove bottom border for the last row */
+}
+
+.stock-history tbody tr:hover {
+    background-color: #eff6ff; /* A light blue on hover */
+    transition: background-color 0.2s ease; /* Smooth transition for hover */
+}
+
+.stock-history p {
+    padding: 1.5rem; /* More padding for the no data message */
+    text-align: center;
+    color: #6b7280;
+    font-style: italic; /* Emphasize no data message */
+}
+
+/* Responsive Adjustments (Optional but Recommended) */
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 200px; /* Slightly smaller sidebar on medium screens */
+        padding: 0.75rem;
+    }
+
+    .main-content {
+        padding: 1.25rem;
+    }
+
+    header h2 {
+        font-size: 1.625rem;
+    }
+
+    .stock-actions {
+        flex-direction: column; /* Stack actions vertically */
+        align-items: flex-start; /* Align stacked items to the left */
+        gap: 0.75rem; /* Reduced gap */
+    }
+
+    .search-bar {
+        width: 100%; /* Full width for search on smaller screens */
+        margin-right: 0; /* Remove fixed margin when stacking */
+    }
+
+    .search-bar input {
+        width: 100%;
+    }
+
+    .date-filter {
+        width: 100%; /* Full width for date filter */
+    }
+
+    .date-filter input {
+        width: 100%;
+    }
+
+    .search-buttons {
+        width: 100%; /* Make buttons take full width if needed */
+        justify-content: center; /* Center buttons when stacked */
+    }
+
+    .add-stock-button {
+        width: 100%; /* Full width for add button */
+        justify-content: center; /* Center content of add button */
+    }
+
+    /* **UPDATED: Adjust table margin for medium screens** */
+    .stock-history {
+        margin-left: 10px; /* Slightly less margin on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .stock-management-container {
+        flex-direction: column; /* Stack sidebar and main content vertically */
+        height: auto; /* Allow height to adjust based on content */
+        min-height: 100vh; /* Ensure it's at least viewport height */
+    }
+
+    .sidebar {
+        width: 100%;
+        position: fixed; /* Fix sidebar to the bottom for mobile */
+        bottom: 0;
+        left: 0;
+        top: auto; /* Override top: 0 from desktop */
+        height: auto;
+        padding: 0.75rem 0; /* Adjust padding for bottom bar */
+        flex-direction: row; /* Horizontal navigation */
+        justify-content: space-around;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15); /* Shadow above the bar */
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        z-index: 1000; /* Ensure it's on top */
+    }
+
+    .sidebar .logo {
+        display: none; /* Hide logo on mobile for compact bar */
+    }
+
+    .sidebar .nav-links {
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .sidebar .nav-links li {
+        margin-bottom: 0;
+        flex: 1; /* Distribute links evenly */
+        text-align: center;
+    }
+
+    .sidebar .nav-links li a {
+        flex-direction: column; /* Stack icon and text vertically */
+        font-size: 0.7rem; /* Smaller font for mobile tabs */
+        padding: 0.5rem 0.25rem;
+    }
+
+    .main-content {
+        padding: 1rem; /* Reduced padding for smaller screens */
+        padding-bottom: 5rem; /* Add padding to prevent content hiding behind fixed bottom bar */
+    }
+
+    header h2 {
+        font-size: 1.5rem;
+    }
+
+    .stock-actions {
+        gap: 0.75rem;
+    }
+
+    /* **UPDATED: Remove table left margin on small screens to use full width** */
+    .stock-history {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 0.75rem;
+    }
+
+    header h2 {
+        font-size: 1.25rem;
+    }
+
+    .stock-actions {
+        flex-direction: column;
+        align-items: stretch; /* Stretch items to full width */
+    }
+
+    .search-bar,
+    .date-filter,
+    .search-buttons,
+    .add-stock-button {
+        width: 100%; /* All action elements take full width */
+    }
+
+    .search-buttons {
+        flex-direction: column;
+    }
+
+    .search-button,
+    .reset-button {
+        width: 100%; /* Make individual buttons full width */
+    }
+
+    .stock-history thead th,
+    .stock-history tbody td {
+        padding: 0.75rem 1rem; /* Reduced padding for table cells */
+        font-size: 0.8rem;
+    }
+}
